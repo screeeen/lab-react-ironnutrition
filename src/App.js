@@ -26,13 +26,22 @@ class App extends Component {
     this.setState({ myFoods : foodsCopy })
   }
 
-
+searchFood = (e) => {
+const { value,name } = e.target;
+const foodsCopy = [...this.state.myFoods];
+foodsCopy.forEach()// map??? or filter???
+this.setState({ myFoods : foodsCopy })
+  
+}
 
 
   render() {
     return (
       <div className="App">
           <AddFood AddFood={this.addFoodHandler} />
+            <input name="search" type="text" placeholder='i.e. chili con carne' value='' onChange={(e) => this.searchFood(e)} />
+            
+            <button type="submit"> Submit </button>
         {
           this.state.myFoods.map((oneFood, index) => {
             console.log()
