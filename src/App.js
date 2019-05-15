@@ -1,25 +1,54 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import foods from './data/foods.json'
+import 'bulma/css/bulma.css';
 import './App.css';
+import Foodbox from './components/Foodbox.js';
+import AddFood from './components/AddFood.js'
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      // name: 'salad',
+      // calories: 30,
+      // image: 'https://i.imgur.com/DupGBz5.jpg',
+      // quantity: 50
+
+      myFoods : foods
+    }
+  }
+
+
+  addFoodHandler = (newFood) => {
+    const foodsCopy = [...this.state.myFoods];
+    foodsCopy.push(newFood);
+    
+    this.setState({ myFoods : foodsCopy })
+  }
+
+
+
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+          <AddFood AddFood={this.addFoodHandler} />
+        {
+          this.state.myFoods.map((oneFood, index) => {
+            console.log()
+            return (
+              <Foodbox
+                key={index}
+                name={oneFood.name}
+                calories={oneFood.calories}
+                image={oneFood.image}
+                quantity={oneFood.quantity}
+              />
+            )
+          })
+        }
+
+
       </div>
     );
   }
